@@ -1,25 +1,44 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import LoginPage from '../views/LoginPage.vue';
+import RegisterPage from '../views/RegisterPage.vue';
+import DashboardPage from '../views/DashboardPage/DashboardPage.vue';
+import store from '../store';
+import Swal from 'sweetalert2';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: LoginPage
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: '/register',
+    name: 'register',
+    component: RegisterPage
+  },
+  {
+    path: '/user/dashboard',
+    name: 'dashboardPage',
+    component: DashboardPage,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isLoggedIn) {
+        next();
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tidak Dapat Diakses',
+          text: 'Mohon Login Terlebih Dahulu.',
+        }).then(() => {
+          next('/');
+        });
+      }
+    }
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

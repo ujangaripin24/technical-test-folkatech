@@ -7,13 +7,13 @@
             <h5 class="card-title text-left mb-4">
               <p class="text-title">Masuk</p>
             </h5>
-            <form>
+            <form @submit.prevent="login">
               <div class="mb-3">
-                <input type="text" class="form-control shadow-sm" id="username" placeholder="Email" required>
+                <input type="text" class="form-control shadow-sm" id="username" v-model="email" placeholder="Email" required>
               </div>
               <div class="mb-3">
                 <div class="input-group">
-                  <input :type="showPassword ? 'text' : 'password'" class="form-control shadow-sm" id="password"
+                  <input :type="showPassword ? 'text' : 'password'" v-model="password" class="form-control shadow-sm" id="password"
                     placeholder="Password" required>
                   <div class="input-group-append shadow-sm">
                     <button class="btn btn-outline-secondary" type="button" @click="togglePasswordVisibility">
@@ -45,7 +45,7 @@ export default {
     return {
       showPassword: false,
       email: '',
-      passwod: ''
+      password: ''
     };
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
       console.log('Forgot Password clicked!');
     },
     login() {
-      store.dispatch('login', {email: this.email, password: this.password})
+      store.dispatch('login', { email: this.email, password: this.password });
     }
   }
 };

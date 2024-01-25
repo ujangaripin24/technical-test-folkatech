@@ -2,7 +2,9 @@ import { createStore } from 'vuex';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Cookies from 'universal-cookie';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const cookies = new Cookies();
 
 export default createStore({
@@ -22,15 +24,17 @@ export default createStore({
     async login({ commit }, credentials) {
       try {
         const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/api/login`, credentials);
+        console.log('Response dari try:', response);
         const { data } = response;
       
-        if (data.code === 200) {
+        if (data && data.code === 200) {
           commit('SET_USER', data.data);
-          cookies.set('token', data.data.token);
-          cookies.set('_email', data.data.email);
-          cookies.set('_name', data.data.name);
-          cookies.set('_phone_number', data.data.phone_number);
-          window.location.href = '/user/dashboard';
+          localStorage.setItem('token', data.data.token);
+          localStorage.setItem('_email', data.data.email);
+          localStorage.setItem('_name', data.data.name);
+          localStorage.setItem('_phone_number', data.data.phone_number);
+          // router.push('/user/dashboard');
+          window.location = '/user/dashboard';
         } else {
           Swal.fire({
             icon: 'error',
@@ -44,7 +48,7 @@ export default createStore({
         Swal.fire({
           icon: 'error',
           title: 'Login Error',
-          text: 'An error occurred during login. Please try again.',
+          text: error.response.data.message,
         });
       }
     },
@@ -54,7 +58,7 @@ export default createStore({
 
       commit('SET_USER', null);
 
-      window.location.href = '/';
+      router.push('/');
     },
   },
   modules: {},

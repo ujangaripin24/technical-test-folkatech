@@ -16,7 +16,6 @@ const requireAuth = (to, from, next) => {
     const phone_number = localStorage.getItem('_phone_number');
 
     if (token && email && name && phone_number) {
-      // Set user data in Vuex store
       store.commit('SET_USER', {
         token: token,
         email: email,

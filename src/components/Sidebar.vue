@@ -2,16 +2,15 @@
   <div class="sidebar shadow-sm">
     <div class="container">
       <label for="customRange1" class="form-label">Harga</label>
-      <input type="range" class="form-range" id="customRange1" v-model="selectedValue" @input="updateInput" />
+      <input type="range" class="form-range" min="0" max="10000000" id="customRange3" v-model="selectedValue" @input="updateInput" />
 
       <div class="mt-3">
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" id="priceInput" v-model="selectedValue" />
+            <input type="number" class="form-control" id="priceInput" @input="handleMinValue" v-model="minValue" />
           </div>
           <div class="col">
-            <input type="text" class="form-control" id="priceInput" v-model="selectedValue" />
-
+            <input type="number" class="form-control" id="priceInput" @input="handleMaxValue" v-model="maxValue" />
           </div>
         </div>
       </div>
@@ -494,14 +493,21 @@
 export default {
   data() {
     return {
-      selectedValue: 0,
+      minValue: null,
+      maxValue: null,
     };
   },
   methods: {
-    updateInput(event) {
-      this.selectedValue = event.target.value;
+    handleMinValue(){
+      console.log(this.minValue);
+      this.$emit('minValueUpdate', this.minValue)
     },
+    handleMaxValue(){
+      console.log(this.maxValue);
+      this.$emit('maxValueUpdate', this.maxValue)
+    }
   },
+
 };
 </script>
   

@@ -126,6 +126,7 @@ export default {
         });
         this.totalData = response.data.data.total;
         this.products = response.data.data;
+        console.log(this.products, "Data Produck");
         this.loading = false;
       } catch (error) {
         console.error('Error fetching product data:', error);

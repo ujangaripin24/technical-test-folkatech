@@ -2,21 +2,22 @@
   <div class="home">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
       <div class="col-md-8">
-        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 700px; height: 400px;">
-          <div class="card-body">
+        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 700px; height: auto;">
+          <div class="card-body" v-if="!hasToken" >
             <h5 class="card-title text-left mb-4">
               <p class="text-title">Masuk</p>
             </h5>
             <form @submit.prevent="login">
               <div class="mb-3">
-                <input type="text" class="form-control shadow-sm" id="username" v-model="email" placeholder="Email" required>
+                <input type="text" class="form-control shadow-sm" id="username" v-model="email" placeholder="Email"
+                  required>
               </div>
               <div class="mb-3">
                 <div class="input-group">
-                  <input :type="showPassword ? 'text' : 'password'" v-model="password" class="form-control shadow-sm" id="password"
-                    placeholder="Password" required>
+                  <input :type="showPassword ? 'text' : 'password'" v-model="password" class="form-control shadow-sm"
+                    id="password" placeholder="Password" required>
                   <div class="input-group-append shadow-sm">
-                    <button class="btn btn-outline-secondary" type="button" @click="togglePasswordVisibility">
+                    <button class="btn btn-outline-secondary" type="button" @click="showTextPassword">
                       {{ showPassword ? 'Hide' : 'Show' }}
                     </button>
                   </div>
@@ -32,6 +33,9 @@
               <p>Belum Punya akun? <router-link to="/register" class="link-register">Daftar Sekarang</router-link></p>
             </div>
           </div>
+          <div v-if="hasToken">
+            <a href="/user/dashboard" class="btn btn-block btn-login shadow-sm">Menuju Dashboard</a>
+          </div>
         </div>
       </div>
     </div>
@@ -45,11 +49,16 @@ export default {
     return {
       showPassword: false,
       email: '',
-      password: ''
+      password: '',
+      hasToken: this.checkToken(),
     };
   },
   methods: {
-    togglePasswordVisibility() {
+    checkToken() {
+      const token = localStorage.getItem('token');
+      return !!token;
+    },
+    showTextPassword() {
       this.showPassword = !this.showPassword;
     },
     forgotPassword() {

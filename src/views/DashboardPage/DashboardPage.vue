@@ -65,7 +65,7 @@
                 @click="handleDetailProduct(product.id, product.short_description, product.product_type.name, product.price)">
                 <img v-if="product.images.length > 0" :src="product.images[0].image_url" alt="Product Image" />
                 <div class="card-body text-center">
-                  <text class="card-title type-description">{{ product.short_description }}</text><br>
+                  <text class="card-title type-description">{{ shortedText(product.short_description) }}</text><br>
                   <text class="card-text type-name">{{ product.product_type.name }}</text><br>
                   <div style="size: 5px;"><font-awesome-icon v-for="index in 5" :key="index" :icon="['fas', 'star']"
                       style="color: #FFD43B;" />(7)
@@ -124,6 +124,13 @@ export default {
     // },
   },
   methods: {
+    shortedText(description) {
+      if (description.length > 20) {
+        return description.substring(0, 20) + '...';
+      } else {
+        return description;
+      }
+    },
     propsSearchProduct(searchStringProduct) {
       this.searchProduct = searchStringProduct;
     },

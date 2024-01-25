@@ -5,7 +5,7 @@ Ini Adalah Hasil Technical Test Frontend Ujang Aripi
 Pastikan untuk menggunakan Node v20.10.0 - NPM 10.2.3 - @Vue/Cli 5.0.8
 
 ### Saran untuk Backend Developer
-Mungkin untuk detail Produck bisa ditambahkan endpoint GET by ID
+Mungkin untuk detail Product bisa ditambahkan endpoint GET by ID
 
 ## Project setup
 ```

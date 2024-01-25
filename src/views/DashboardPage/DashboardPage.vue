@@ -115,7 +115,13 @@ export default {
     },
     selectData(newShowData) {
       this.fetchProductData(newShowData);
-    }
+    },
+    // minPrice: function(newMinPrice) {
+    //   this.fetchProductData();
+    // },
+    // maxPrice: function(newMaxPrice) {
+    //   this.fetchProductData();
+    // },
   },
   methods: {
     propsSearchProduct(searchStringProduct) {

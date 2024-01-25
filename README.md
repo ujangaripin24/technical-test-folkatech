@@ -1,5 +1,8 @@
 # test-folkatech
+Ini Adalah Hasil Technical Test Frontend Ujang Aripi
 
+## Setting NPM
+Pastikan untuk menggunakan Node v20.10.0 - NPM 10.2.3 - @Vue/Cli 5.0.8
 ## Project setup
 ```
 npm install

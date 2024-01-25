@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout">
-    <Sidebar />
+    <Sidebar @minValueUpdate="handleMinValue" @maxValueUpdate="handleMaxValue" />
     <div class="content">
       <Header @searchUpdated="propsSearchProduct" />
       <div>
@@ -36,8 +36,18 @@
         </div>
         <div v-if="searchProduct !== ''">
           <label class="search-text" for="">
-          Mencari Product: "<i>{{ searchProduct }}</i>"
-        </label>
+            Mencari Product: "<i>{{ searchProduct }}</i>"
+          </label>
+        </div>
+        <div v-if="minPrice !== 0">
+          <label class="search-text" for="">
+            Mencari Product: "<i>{{ minPrice }}</i>"
+          </label>
+        </div>
+        <div v-if="maxPrice !== 900000">
+          <label class="search-text" for="">
+            Mencari Product: "<i>{{ maxPrice }}</i>"
+          </label>
         </div>
       </div>
       <div class="mt-4">
@@ -92,6 +102,8 @@ export default {
       sorting: 'ASC',
       selectData: 20,
       searchProduct: '',
+      minPrice: 0,
+      maxPrice: 900000,
     };
   },
   mounted() {
@@ -117,27 +129,40 @@ export default {
       this.fetchProductData(this.sorting, newShowData);
     },
 
-    async fetchProductData(sorting = 'ASC', selectData = 20) {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=0,90000&page=1&limit=${selectData}&order=product_name,${sorting}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        this.totalData = response.data.data.total;
-        this.products = response.data.data;
-        console.log(this.products, "Data Produck");
-        this.loading = false;
-      } catch (error) {
-        console.error('Error fetching product data:', error);
-      }
+    handleMinValue(minValue) {
+      this.minPrice = minValue;
+      this.fetchProductData();
     },
-    handleDetailProduct(id, short_description, product_type, price) {
-      console.log(id, 'Detail id');
-      window.location = `/user/product/${id}/${short_description}/${product_type}/${price}`
+    handleMaxValue(maxValue) {
+      this.maxPrice = maxValue;
+      this.fetchProductData();
     },
-  },
-};
+
+      async fetchProductData(sorting = 'ASC', selectData = 20) {
+        const minPrice = this.minPrice;  // Ambil nilai minPrice dari data komponen
+        const maxPrice = this.maxPrice;  // Ambil nilai maxPrice dari data komponen
+
+        try {
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=${minPrice},${maxPrice}&page=1&limit=${selectData}&order=product_name,${sorting}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          this.totalData = response.data.data.total;
+          this.products = response.data.data;
+          console.log(this.products, "Data Product");
+          this.loading = false;
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+        }
+      },
+
+      handleDetailProduct(id, short_description, product_type, price) {
+        console.log(id, 'Detail id');
+        window.location = `/user/product/${id}/${short_description}/${product_type}/${price}`
+      },
+    },
+  };
 </script>
 
 <style>
@@ -179,7 +204,7 @@ export default {
   font-size: xx-small;
 }
 
-.search-text{
+.search-text {
   font-size: 12px;
 }
 </style>

@@ -493,17 +493,15 @@
 export default {
   data() {
     return {
-      minValue: null,
-      maxValue: null,
+      minValue: 0,
+      maxValue: 900000,
     };
   },
   methods: {
     handleMinValue(){
-      console.log(this.minValue);
       this.$emit('minValueUpdate', this.minValue)
     },
     handleMaxValue(){
-      console.log(this.maxValue);
       this.$emit('maxValueUpdate', this.maxValue)
     }
   },

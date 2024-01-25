@@ -32,40 +32,94 @@
       <div class="form-check">
         <div class="container">
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Aceh
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Aceh
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(8)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Semarang
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Semarang
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(2)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Bandung
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Bandung
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(7)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Jawa
-            </label>
-          </div>
-          <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Amerika Selatan
-            </label>
-          </div>
-          <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Lain - Lain
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Jawa
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(5)</label>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <input class="form-check-input" type="checkbox" value="">
+                  <label class="form-check-label">
+                    Amerika Selatan
+                  </label>
+                </div>
+                <div>
+                  <button class="btn">
+                    <label for="" class="form-check-label">(6)</label>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                      Lain-Lain
+                    </label>
+                  </div>
+                  <div>
+                    <button class="btn">
+                      <label for="" class="form-check-label">(8)</label>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,22 +140,94 @@
       <div class="form-check">
         <div class="container">
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Arabika
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Arabika
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(128)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Robusta
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Robusta
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(23)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Blend
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Blend
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(9)</label>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Jawa
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(5)</label>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <input class="form-check-input" type="checkbox" value="">
+                  <label class="form-check-label">
+                    Amerika Selatan
+                  </label>
+                </div>
+                <div>
+                  <button class="btn">
+                    <label for="" class="form-check-label">(6)</label>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                      Lain-Lain
+                    </label>
+                  </div>
+                  <div>
+                    <button class="btn">
+                      <label for="" class="form-check-label">(8)</label>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -122,28 +248,64 @@
       <div class="form-check">
         <div class="container">
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Light Roast
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Light Roast
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(8)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Medium Roast
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Medium Roast
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(2)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Dark Roast
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Dark Roast
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(7)</label>
+                </button>
+              </div>
+            </div>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" value="">
-            <label class="form-check-label">
-              Light To Medium Roast
-            </label>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Light to Medium Roast
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(5)</label>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,11 +510,13 @@ export default {
   width: 300px;
   background-color: #fff;
 }
-.label{
+
+.label {
   background-color: red;
   color: #f0f0f0;
 }
-.p{
+
+.p {
   font-weight: bold;
 }
 </style>

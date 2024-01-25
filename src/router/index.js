@@ -54,7 +54,7 @@ const routes = [
     beforeEnter: requireAuth
   },
   {
-    path: '/user/product/:id',
+    path: '/user/product/:id/:short_description/:product_type/:price',
     name: 'DetailProduct',
     component: DetailProduct,
     beforeEnter: requireAuth

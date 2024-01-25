@@ -2,32 +2,74 @@
   <div class="main-layout">
     <Sidebar />
     <div class="content">
-      <Header />
-      <div class="mt-4">
-    <div v-if="loading">
-      <p>Harap Tunggu...</p>
-      <font-awesome-icon :icon="['fas', 'spinner']" pulse />
-    </div>
-    <div v-else-if="products && products.list.length > 0">
-      <div class="product-list">
-        <div v-for="product in products.list" :key="product.id" class="card-wrapper">
-          <div class="card shadow-sm" style="width: 18rem; cursor: pointer;" @click="handleDetailProduct(product.id)">
-            <img v-if="product.images.length > 0" :src="product.images[0].image_url" alt="Product Image" />
-            <div class="card-body text-center">
-              <text class="card-title type-description">{{ product.short_description }}</text><br>
-              <text class="card-text type-name">{{ product.product_type.name }}</text><br>
-              <div style="size: 5px;"><font-awesome-icon v-for="index in 5" :key="index" :icon="['fas', 'star']"
-                  style="color: #FFD43B;" />(7)</div><br>
-              <text class="card-text price">Rp {{ product.price }}</text>
+      <Header @searchUpdated="propsSearchProduct" />
+      <div>
+        <div class="">
+          <div class="d-flex gap-3 justify-content-between align-items-center">
+            <div class="d-flex justify-content-evenly">
+              <div class="dropdown">
+                <label for="" class="mr-3">Menampilkan</label>
+                <button class="btn btn-light btn-sm dropdown-toggle mx-2" type="button" id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li v-for="number in 20" :key="number">
+                    <a class="dropdown-item" @click="shortingNumber(number)">{{ number }}</a>
+                  </li>
+                </ul>
+                <label for="" class="mb-3"> dari {{ this.totalData }}</label>
+              </div>
+            </div>
+            <div>
+              <div class="dropdown">
+                <label for="">Urutkan</label>
+                <button class="btn btn-light btn-sm dropdown-toggle mx-2" type="button" id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li @click="shortingProduct('ASC')"><a class="dropdown-item">A - Z</a></li>
+                  <li @click="shortingProduct('DESC')"><a class="dropdown-item">Z - A</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
+        <div v-if="searchProduct !== ''">
+          <label class="search-text" for="">
+          Mencari Product: "<i>{{ searchProduct }}</i>"
+        </label>
+        </div>
       </div>
-    </div>
-    <div v-else>
-      <p>No products available.</p>
-    </div>
-  </div>
+      <div class="mt-4">
+        <div v-if="loading">
+          <div class="row justify-content-center align-items-center">
+            <h2>
+              <font-awesome-icon :icon="['fas', 'spinner']" pulse />
+            </h2>
+          </div>
+        </div>
+        <div v-else-if="products && products.list.length > 0">
+          <div class="product-list">
+            <div v-for="product in products.list" :key="product.id" class="card-wrapper fade-in">
+              <div class="card shadow-sm" style="width: 18rem; cursor: pointer;"
+                @click="handleDetailProduct(product.id, product.short_description, product.product_type.name, product.price)">
+                <img v-if="product.images.length > 0" :src="product.images[0].image_url" alt="Product Image" />
+                <div class="card-body text-center">
+                  <text class="card-title type-description">{{ product.short_description }}</text><br>
+                  <text class="card-text type-name">{{ product.product_type.name }}</text><br>
+                  <div style="size: 5px;"><font-awesome-icon v-for="index in 5" :key="index" :icon="['fas', 'star']"
+                      style="color: #FFD43B;" />(7)
+                  </div><br>
+                  <text class="card-text price">Rp {{ product.price }}</text>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <p>No products available.</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,31 +86,54 @@ export default {
   },
   data() {
     return {
-      loading: true, 
+      loading: true,
       products: null,
+      totalData: null,
+      sorting: 'ASC',
+      selectData: 20,
+      searchProduct: '',
     };
   },
   mounted() {
     this.fetchProductData();
   },
+  watch: {
+    sorting(newSorting) {
+      this.fetchProductData(newSorting);
+    },
+    selectData(newShowData) {
+      this.fetchProductData(newShowData);
+    }
+  },
   methods: {
-    async fetchProductData() {
+    propsSearchProduct(searchStringProduct) {
+      this.searchProduct = searchStringProduct;
+    },
+    shortingProduct(newSorting) {
+      this.sorting = newSorting;
+    },
+    shortingNumber(newShowData) {
+      this.selectData = newShowData;
+      this.fetchProductData(this.sorting, newShowData);
+    },
+
+    async fetchProductData(sorting = 'ASC', selectData = 20) {
       try {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=0,90000&page=1&limit=10&order=product_name,ASC`, {
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=0,90000&page=1&limit=${selectData}&order=product_name,${sorting}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        this.totalData = response.data.data.total;
         this.products = response.data.data;
-        console.log(this.products, "Data Produk");
-        this.loading =false;
+        this.loading = false;
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
     },
-    handleDetailProduct(id) {
+    handleDetailProduct(id, short_description, product_type, price) {
       console.log(id, 'Detail id');
-      window.location = `/user/product/${id}`
+      window.location = `/user/product/${id}/${short_description}/${product_type}/${price}`
     },
   },
 };
@@ -111,4 +176,9 @@ export default {
 
 .star {
   font-size: xx-small;
-}</style>
+}
+
+.search-text{
+  font-size: 12px;
+}
+</style>

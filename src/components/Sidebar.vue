@@ -245,6 +245,86 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <div style="width: 100%; background-color: #f0f0f0; margin-top: 20px; height: auto;">
+        <div class="d-flex justify-content-between align-items-center container">
+          <div>
+            <p>Processing</p>
+          </div>
+          <div>
+            <button class="btn">
+              <font-awesome-icon :icon="['fas', 'sort-up']" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-check">
+        <div class="container">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Honey White
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(8)</label>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Natural
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(2)</label>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Honey Gold
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(7)</label>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label">
+                  Honey Yellow
+                </label>
+              </div>
+              <div>
+                <button class="btn">
+                  <label for="" class="form-check-label">(5)</label>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -267,6 +347,13 @@ export default {
 .sidebar {
   width: 300px;
   background-color: #fff;
+}
+.label{
+  background-color: red;
+  color: #f0f0f0;
+}
+.p{
+  font-weight: bold;
 }
 </style>
   

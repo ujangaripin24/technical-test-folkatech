@@ -1,28 +1,35 @@
 <template>
-    <div class="main-layout">
-        <Sidebar />
-        <div class="content">
-            <Header />
-            <h3>Product List</h3>
-            <div v-if="products && products.list.length > 0">
-                <div class="product-list">
-    <div v-for="product in products.list" :key="product.id" class="card-wrapper">
-      <div class="card shadow-sm" style="width: 18rem;">
-        <img v-if="product.images.length > 0" :src="product.images[0].image_url" alt="Product Image" />
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ product.short_description }}</h5>
-          <p class="card-text">{{ product.product_type.name }}</p>
-          <p class="card-text">{{ product.price }}</p>
+  <div class="main-layout">
+    <Sidebar />
+    <div class="content">
+      <Header />
+      <div class="mt-4">
+    <div v-if="loading">
+      <p>Harap Tunggu...</p>
+      <font-awesome-icon :icon="['fas', 'spinner']" pulse />
+    </div>
+    <div v-else-if="products && products.list.length > 0">
+      <div class="product-list">
+        <div v-for="product in products.list" :key="product.id" class="card-wrapper">
+          <div class="card shadow-sm" style="width: 18rem; cursor: pointer;" @click="handleDetailProduct(product.id)">
+            <img v-if="product.images.length > 0" :src="product.images[0].image_url" alt="Product Image" />
+            <div class="card-body text-center">
+              <text class="card-title type-description">{{ product.short_description }}</text><br>
+              <text class="card-text type-name">{{ product.product_type.name }}</text><br>
+              <div style="size: 5px;"><font-awesome-icon v-for="index in 5" :key="index" :icon="['fas', 'star']"
+                  style="color: #FFD43B;" />(7)</div><br>
+              <text class="card-text price">Rp {{ product.price }}</text>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-            </div>
-            <div v-else>
-                <p>No products available.</p>
-            </div>
-        </div>
+    <div v-else>
+      <p>No products available.</p>
     </div>
+  </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -31,45 +38,51 @@ import Header from '@/components/Header.vue';
 import axios from 'axios';
 
 export default {
-    components: {
-        Sidebar,
-        Header,
+  components: {
+    Sidebar,
+    Header,
+  },
+  data() {
+    return {
+      loading: true, 
+      products: null,
+    };
+  },
+  mounted() {
+    this.fetchProductData();
+  },
+  methods: {
+    async fetchProductData() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=0,90000&page=1&limit=10&order=product_name,ASC`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        this.products = response.data.data;
+        console.log(this.products, "Data Produk");
+        this.loading =false;
+      } catch (error) {
+        console.error('Error fetching product data:', error);
+      }
     },
-    data() {
-        return {
-            products: null,
-        };
+    handleDetailProduct(id) {
+      console.log(id, 'Detail id');
+      window.location = `/user/product/${id}`
     },
-    mounted() {
-        this.fetchProductData();
-    },
-    methods: {
-        async fetchProductData() {
-            try {
-                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=0,90000&page=1&limit=10&order=product_name,ASC`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                });
-                this.products = response.data.data;
-                console.log(this.products, "Data Produk");
-            } catch (error) {
-                console.error('Error fetching product data:', error);
-            }
-        },
-    },
+  },
 };
 </script>
 
 <style>
 .main-layout {
-    display: flex;
-    z-index: 9999;
+  display: flex;
+  z-index: 9999;
 }
 
 .content {
-    flex: 1;
-    padding: 20px;
+  flex: 1;
+  padding: 20px;
 }
 
 .product-list {
@@ -82,4 +95,20 @@ export default {
   flex: 0 0 30%;
   margin: 0 10px 10px 0;
 }
-</style>
+
+.price {
+  color: #EB3F36;
+  font-size: small;
+}
+
+.type-name {
+  color: #696969;
+}
+
+.type-description {
+  color: #696969;
+}
+
+.star {
+  font-size: xx-small;
+}</style>

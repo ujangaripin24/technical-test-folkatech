@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from '../views/LoginPage.vue';
 import RegisterPage from '../views/RegisterPage.vue';
 import DashboardPage from '../views/DashboardPage/DashboardPage.vue';
+import DetailProduct from '../views/DashboardPage/DetailProduct.vue';
 import store from '../store';
 import Swal from 'sweetalert2';
 
@@ -52,6 +53,13 @@ const routes = [
     component: DashboardPage,
     beforeEnter: requireAuth
   },
+  {
+    path: '/user/product/:id',
+    name: 'DetailProduct',
+    component: DetailProduct,
+    beforeEnter: requireAuth
+  }
+  
 ];
 
 const router = createRouter({

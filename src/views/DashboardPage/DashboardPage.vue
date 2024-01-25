@@ -138,9 +138,10 @@ export default {
       this.fetchProductData();
     },
 
-      async fetchProductData(sorting = 'ASC', selectData = 20) {
-        const minPrice = this.minPrice;  // Ambil nilai minPrice dari data komponen
-        const maxPrice = this.maxPrice;  // Ambil nilai maxPrice dari data komponen
+      async fetchProductData(sorting = 'ASC') {
+        const minPrice = this.minPrice; 
+        const maxPrice = this.maxPrice;
+        const selectData = this.selectData;
 
         try {
           const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/api/product?price=${minPrice},${maxPrice}&page=1&limit=${selectData}&order=product_name,${sorting}`, {

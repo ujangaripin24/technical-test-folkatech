@@ -1,11 +1,11 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Cookies from 'universal-cookie';
-import { useRouter } from 'vue-router';
+// import Cookies from 'universal-cookie';
+// import { useRouter } from 'vue-router';
 
-const router = useRouter();
-const cookies = new Cookies();
+// const router = useRouter();
+// const cookies = new Cookies();
 
 export default createStore({
   state: {
@@ -54,11 +54,11 @@ export default createStore({
     },
 
     logout({ commit }) {
-      cookies.remove('token');
+      localStorage.clear();
 
       commit('SET_USER', null);
 
-      router.push('/');
+      window.location = '/';
     },
   },
   modules: {},

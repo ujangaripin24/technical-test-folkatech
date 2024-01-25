@@ -23,5 +23,8 @@ npm run build
 npm run lint
 ```
 
+### Saran untuk Backend Developer
+Mungkin untuk detail Produck bisa ditambahkan endpoint GET by ID
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
